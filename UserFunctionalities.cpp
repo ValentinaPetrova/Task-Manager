@@ -145,11 +145,18 @@ void UserFunctionalities::addTaskToDashboard(const int id)
 void UserFunctionalities::deleteTask(const int id)
 {
 	int taskIndex = findTaskIndex(id);
-	if (tasks[taskIndex]->returnType() == taskType::PersonalTask)
+	if (taskIndex >= 0 && tasks[taskIndex]->returnType() == taskType::PersonalTask)
 	{
-		for (size_t i = taskIndex; i < tasksCount; i++)
+		for (int i = taskIndex; i < tasksCount; i++)
 		{
-			tasks[i] = tasks[i + 1];
+			if (tasks.getSize() > 1)
+			{
+				tasks[i] = tasks[i + 1];
+			}
+			else
+			{
+				tasks[i] = nullptr;
+			}
 		}
 		tasksCount--;
 	}
@@ -207,6 +214,7 @@ void UserFunctionalities::listCompletedTasks() const
 }
 void UserFunctionalities::listDashboard() const
 {
+	std::cout << "Dashboard:" << std::endl;
 	for (size_t i = 0; i < dashboard.tasks.getSize(); i++)
 	{
 		dashboard.tasks[i]->printTask();
@@ -219,6 +227,7 @@ void UserFunctionalities::finishTask(const int id)
 	if (tasks[taskIndex]->returnType() == taskType::PersonalTask)
 	{
 		tasks[taskIndex]->setStatus(Status::DONE);
+		std::cout << "Congratulations on completing the task!" << std::endl;
 	}
 	else 
 	{

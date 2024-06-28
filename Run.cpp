@@ -27,7 +27,6 @@ void assignTask(TaskManager& taskManager)
 	std::cin.getline(buff, 1024);
 	description =  buff;
 	taskManager.assignTaskToCollaboration(collaborationName, username, taskName, dueDate, description);
-	std::cout << "Task assigned successfully to " << username << "!" << std::endl;
 }
 
 void addUser(TaskManager& taskManager, size_t userIndex)
@@ -56,7 +55,6 @@ void addCollaboration(TaskManager& taskManager, size_t userIndex)
 	MyString collaborationName;
 	std::cin >> collaborationName;
 	taskManager.addCollaboration(userIndex, collaborationName);
-	std::cout << "Collaboration added successfully!" << std::endl;
 }
 
 void finishTask(TaskManager& taskManager, size_t userIndex)
@@ -64,7 +62,7 @@ void finishTask(TaskManager& taskManager, size_t userIndex)
 	int id;
 	std::cin >> id;
 	taskManager.finishTask(userIndex, id);
-	std::cout << "Task finished successfully!";
+	std::cout << "Task finished successfully!" << std::endl;
 }
 
 void listDashboard(TaskManager& taskManager, size_t userIndex)
@@ -99,7 +97,7 @@ void deleteTask(TaskManager& taskManager, size_t userIndex)
 	int id;
 	std::cin >> id;
 	taskManager.deleteTask(userIndex, id);
-	std::cout << "Task was successfully deleted!";
+	std::cout << "Task was successfully deleted!" << std::endl;
 }
 
 void addTaskToDashboard(TaskManager& taskManager, size_t userIndex)
@@ -107,14 +105,14 @@ void addTaskToDashboard(TaskManager& taskManager, size_t userIndex)
 	int id;
 	std::cin >> id;
 	taskManager.addTaskToDashboard(userIndex, id);
-	std::cout << "Task was successfully added to dashboard!";
+	std::cout << "Task was successfully added to dashboard!" << std::endl;
 }
 void removeTaskFromDashboard(TaskManager& taskManager, size_t userIndex)
 {
 	int id;
 	std::cin >> id;
 	taskManager.removeTaskFromDashboard(userIndex, id);
-	std::cout << "Task was successfully removed from dashboard!";
+	std::cout << "Task was successfully removed from dashboard!" << std::endl;
 }
 void updateTaskDescription(TaskManager& taskManager, size_t userIndex)
 {

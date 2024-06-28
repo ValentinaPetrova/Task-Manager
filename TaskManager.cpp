@@ -198,8 +198,23 @@ void TaskManager::finishTask(size_t userIndex, const int id)
 
 void TaskManager::addCollaboration(size_t userIndex, const MyString& collaborationName)
 {
-	CollaborationFunctionalities collaboration(collaborationName, users[userIndex]);
-	collaborations.pushBack(collaboration);
+	bool exist = false;
+	for (size_t i = 0; i < collaborations.getSize(); i++)
+	{
+		if (collaborations[i].getName() == collaborationName)
+		{
+			exist = true;
+			std::cout << "There is such a collaboration already!" << std::endl;
+			break;
+		}
+	}
+	if (!exist)
+	{
+		CollaborationFunctionalities collaboration(collaborationName, users[userIndex]);
+		collaborations.pushBack(collaboration);
+		std::cout << "Collaboration added successfully!" << std::endl;
+	}
+	
 }
 void TaskManager::deleteCollaboration(size_t userIndex, const MyString& collaborationName)
 {
@@ -236,11 +251,12 @@ int TaskManager::findCollaborationIndex(const MyString& collaborationName) const
 void TaskManager::assignTaskToCollaboration(const MyString& collaborationName, const MyString& username,
 	const MyString& taskName, const MyString& dueDate, const MyString& description)
 {
-	size_t collaborationIndex = findCollaborationIndex(collaborationName);
-	size_t userIndex = findUserIndex(username);
+	int collaborationIndex = findCollaborationIndex(collaborationName);
+	int userIndex = findUserIndex(username);
 	if (userIndex >= 0 && collaborationIndex >= 0)
 	{
 		collaborations[collaborationIndex].assignTask(users[userIndex], taskName, dueDate, description);
+		std::cout << "Task assigned successfully to " << username << "!" << std::endl;
 	}
 }
 
@@ -261,6 +277,7 @@ void TaskManager::listCollaborationTasks(const MyString& collaborationName) cons
 	int collaborationIndex = findCollaborationIndex(collaborationName);
 	if (collaborationIndex >= 0)
 	{
+		std::cout << "Tasks for " << collaborationName << ":" << std::endl;
 		collaborations[collaborationIndex].listTasks();
 	}
 	else
