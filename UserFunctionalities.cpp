@@ -28,11 +28,21 @@ void UserFunctionalities::addCollaborationTask(const MyString& name, const MyStr
 	tasksCount++;
 }
 
+void UserFunctionalities::addAssignedCollaborationTask(const MyString& assignee, const MyString& name, const MyString& due_date, const MyString& description)
+{
+	tasks.pushBack(taskFactory(taskType::CollaboartionTask));
+	tasks[tasksCount]->setName(name);
+	tasks[tasksCount]->setDueDate(due_date);
+	tasks[tasksCount]->setDescription(description);
+	tasks[tasksCount]->setAssignee(assignee);
+	tasksCount++;
+}
+
 bool UserFunctionalities::existingTask(const MyString& name, const MyString& due_date, const MyString& description) const
 {
 	for (int i = 0; i < tasks.getSize(); i++)
 	{
-		if (tasks[i]->getName() == name && tasks[i]->getDate() == due_date && tasks[i]->getDescription() == description)
+		if (tasks[i]->getName() == name && tasks[i]->getDateForCompare() == due_date && tasks[i]->getDescription() == description)
 		{
 			std::cout << "Such a task already exists." << std::endl;
 			return true;
@@ -48,6 +58,7 @@ int UserFunctionalities::findTaskIndex(const int id) const
 		std::cout << "You dont't have tasks yet." << std::endl;
 		return -1;
 	}
+
 	for (int i = 0; i < tasks.getSize(); i++) {
 		if (tasks[i]->getId() == id) {
 			return i;
@@ -65,6 +76,7 @@ int UserFunctionalities::findTaskIndex(const MyString& name) const
 		std::cout << "You dont't have tasks yet." << std::endl;
 		return -1;
 	}
+
 	for (int i = 0; i < tasksCount; i++) {
 		if (tasks[i]->getName() == name) {
 			return i;
@@ -81,7 +93,7 @@ void UserFunctionalities::updateTaskName(const int id, const MyString& name)
 		std::cout << "Task name updated successfully!" << std::endl;
 	}
 	else {
-		std::cout << "You don't have the access to change this Task" << std::endl;
+		std::cout << "You don't have the access to change this task." << std::endl;
 	}
 }
 
@@ -149,21 +161,28 @@ void UserFunctionalities::deleteTask(const int id)
 void UserFunctionalities::getTask(const MyString& name) const
 {
 	int taskIndex = findTaskIndex(name);
-	tasks[taskIndex]->printTask();
+	if (taskIndex >= 0)
+	{
+		tasks[taskIndex]->printTask();
+	}
 }
 
 void UserFunctionalities::getTask(const int id) const
 {
 	int taskIndex = findTaskIndex(id);
-	tasks[taskIndex]->printTask();
-	
+	if (taskIndex >= 0)
+	{
+		tasks[taskIndex]->printTask();
+	}
 }
 
 void UserFunctionalities::listTask(const MyString& date) const
 {
+	MyString dateForCompare;
 	for (size_t i = 0; i < tasks.getSize(); i++)
 	{
-		if (tasks[i]->getDate() == date)
+		dateForCompare = tasks[i]->getDateForCompare();
+		if (dateForCompare == date)
 		{
 			tasks[i]->printTask();
 		}

@@ -23,7 +23,7 @@ void CollaborationFunctionalities::addTask(const UserFunctionalities& user,const
 		tasks[tasksCount].setName(name);
 		tasks[tasksCount].setDueDate(due_date);
 		tasks[tasksCount].setDescription(description);
-		tasks[tasksCount].setAssignee(user);
+		tasks[tasksCount].setAssignee(user.getUsername());
 	}
 }
 
@@ -44,7 +44,7 @@ void CollaborationFunctionalities::assignTask(UserFunctionalities& user,
 	const MyString& taskName, const MyString& dueDate, const MyString& description)
 {
 	addTask(user,taskName, dueDate, description);
-	user.addCollaborationTask(taskName, dueDate, description);
+	user.addAssignedCollaborationTask(user.getUsername(), taskName, dueDate, description);
 }
 void CollaborationFunctionalities::listTasks() const
 {

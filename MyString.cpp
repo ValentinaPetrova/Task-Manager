@@ -41,6 +41,17 @@ MyString::MyString(const char* data)
    }
 }
 
+void MyString::removeFirstChar() 
+{
+    if (_data && _data[0] != '\0') {
+        size_t len = std::strlen(_data);
+        char* newData = new char[len];  // Allocate new memory without the first character
+        std::strcpy(newData, _data + 1); // Copy the string excluding the first character
+        delete[] _data;
+        _data = newData;
+    }
+}
+
 MyString::MyString(size_t stringLength)
 {
     _allocatedDataSize = dataToAllocByStringLen(stringLength);

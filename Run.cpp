@@ -80,7 +80,6 @@ void listComplitedTasks(TaskManager& taskManager, size_t userIndex)
 void listTasks(TaskManager& taskManager, size_t userIndex)
 {
 	MyString input;
-	/*std::cin >> input;*/
 	char buff[1024];
 	std::cin.getline(buff,1024);
 	input = buff;
@@ -90,6 +89,7 @@ void listTasks(TaskManager& taskManager, size_t userIndex)
 	}
 	else
 	{
+		input.removeFirstChar();
 		taskManager.listTasks(userIndex, input);
 	}
 }

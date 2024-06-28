@@ -17,6 +17,7 @@ public:
 
 	void addTask(const MyString& name, const MyString& due_date, const MyString& description);
 	void addCollaborationTask(const MyString& name, const MyString& due_date, const MyString& description);
+	void addAssignedCollaborationTask(const MyString& assignee, const MyString& name, const MyString& due_date, const MyString& description);
 	void updateTaskName(const int id, const MyString& name);
 	void startTask(const int id);
 	void updateTaskDescription(const int id, const MyString& description);

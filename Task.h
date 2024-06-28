@@ -37,12 +37,14 @@ public:
 	int getId() const;
 	MyString getName() const;
 	MyString getDate() const;
+	MyString getDateForCompare() const;
 	MyString getDescription() const;
 	Status getStatus() const;
 	MyString getStatusForPrint() const;
-	void serialize(std::ofstream& file) const;
-	void deserialize(std::ifstream& file);
+	virtual void serialize(std::ofstream& file) const;
+	virtual void deserialize(std::ifstream& file);
 	virtual void printTask() const;
+	virtual void setAssignee(const MyString& name) = 0;
 
 	virtual Task* clone()  const = 0;
 	virtual ~Task() = default;

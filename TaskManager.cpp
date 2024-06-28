@@ -163,13 +163,13 @@ void TaskManager::deleteTask(size_t userIndex, const int id)
 
 void TaskManager::listTasks(size_t userIndex, const MyString& date) const
 {
-	bool listed = 0;
+	bool listed = false;
 	for (size_t i = 0; i < collaborations.getSize(); i++)
 	{
 		if (date == collaborations[i].getName())
 		{
 			listCollaborationTasks(date);
-			listed = 1;
+			listed = true;
 			break;
 		}
 	}
@@ -204,7 +204,7 @@ void TaskManager::addCollaboration(size_t userIndex, const MyString& collaborati
 void TaskManager::deleteCollaboration(size_t userIndex, const MyString& collaborationName)
 {
 	size_t collaborationIndex = findCollaborationIndex(collaborationName);
-	if (collaborations[collaborationIndex].getCreatorName() == users[userIndex].getUsername())
+	if (collaborationIndex >= 0 && collaborations[collaborationIndex].getCreatorName() == users[userIndex].getUsername())
 	{
 		collaborations.popAt(collaborationIndex);
 		std::cout << "Collaboration deleted successfully!" << std::endl;

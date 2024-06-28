@@ -127,6 +127,14 @@ MyString Task::getDate() const
         return MyString("Invalid date");
     }*/
 }
+
+MyString Task::getDateForCompare() const
+{
+    std::ostringstream ss;
+    ss << std::put_time(&dueDate, "%Y-%m-%d");
+    MyString toReturn = ss.str().c_str();
+    return toReturn;
+}
 MyString Task::getDescription() const
 {
     return description;

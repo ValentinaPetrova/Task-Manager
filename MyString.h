@@ -20,6 +20,7 @@ public:
 
     char& operator[](size_t index);
     const char& operator[](size_t index) const;
+    void removeFirstChar();
 
     friend std::ostream& operator<<(std::ostream& os, const MyString& obj);
     friend std::istream& operator>>(std::istream& is, MyString& ref);
