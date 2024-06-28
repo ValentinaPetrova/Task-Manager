@@ -1,5 +1,6 @@
 # Task-Manager
 Course project OOP Sem2 SI
+
 To develop a task management software system that allows users to create, edit, view and execute various types of tasks. The system will provide the ability to register and log in users, manage personal and shared tasks, as well as track and change the status of tasks.
 
 1. Task
